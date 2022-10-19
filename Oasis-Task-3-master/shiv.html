@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikas To Do List</title>
+
+    <style>
+        body {
+  margin: 0;
+  min-width: 260px;
+}
+
+* {
+  box-sizing: border-box;
+}
+   
+    ul {
+  margin: 0;
+  padding: 0;
+}
+     
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 15px 10px 15px 40px;
+  list-style-type: upper-alpha;
+  background:pink;
+  font-size: 20px;
+  transition: 0.2s;
+  
+  
+  -webkit-user-select: inherit;;
+  -moz-user-select: inherit;
+  -ms-user-select: inherit;
+  user-select: inherit;
+}
+
+ul li:nth-child(odd) {
+  background: orange;
+}
+
+ul li:hover {
+  background: #ddd;
+}
+
+ul li.checked {
+  background: #885;
+  color: blue;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: red;
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  top: 15px;
+  left: 20px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 10px 5px 10px;
+}
+
+.header {
+  background-color: yellow;
+  padding: 50px 40px;
+  color: red;
+  text-align: center;
+}
+
+
+
+input {
+  margin: 0;
+  border: red;
+  border-radius: 0;
+  width: 50%;
+  padding: 10px;
+  float: center;
+  font-size: 15px;
+}
+
+.addBtn {
+  padding: 10px;
+  width: 15%;
+  background: gold;
+  color: #555;
+  float: right;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+    </style>
+</head>
+<body bgcolor="red">
+    <div id="myDIV" class="header">
+        <h1 style="margin:20px">Vikas To Do List</h1>
+        <marquee behavior="scroll" height="10%" style="color: red;"><h2>Welcome To Vikas's To Do List</h2></marquee>
+        <input type="text" id="myInput" placeholder="Write Here Something...">
+        <span onclick="newElement()" class="addBtn">Add</span>
+      </div>
+      
+      <ul id="myUL">
+        <li>Good Morning</li>
+        <li class="checked">Going To GYM</li>
+        <li>Meet GYM Trainner Baba</li>
+        <li>Eat Proper Food</li>
+        <li>Read a News Paper</li>
+        <li>Going To College</li>
+      </ul>
+<script>
+    var vikasNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < vikasNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  vikasNodelist[i].appendChild(span);
+}
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("Write Here Something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+</body>
+</html>
